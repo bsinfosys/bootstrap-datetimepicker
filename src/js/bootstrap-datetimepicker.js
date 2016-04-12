@@ -1304,8 +1304,9 @@
                 var val = $(e.target).val().trim(),
                     parsedDate = val ? parseInputDate(val) : null;
                 setValue(parsedDate);
-                e.stopImmediatePropagation();
-                return false;
+                /*e.stopImmediatePropagation();
+                return false;*/
+                return true;
             },
 
             attachDatePickerElementEvents = function () {
