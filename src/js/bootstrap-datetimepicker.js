@@ -482,6 +482,9 @@
                 if (e.type === 'dp.change' && ((e.date && e.date.isSame(e.oldDate)) || (!e.date && !e.oldDate))) {
                     return;
                 }
+                if (e.type === 'dp.change') {
+                    element.trigger(jQuery.Event('change', {artificial: true}));
+                }
                 element.trigger(e);
             },
 
@@ -1301,11 +1304,12 @@
             },
 
             change = function (e) {
+                if (e.artificial) {
+                    return true;
+                }
                 var val = $(e.target).val().trim(),
                     parsedDate = val ? parseInputDate(val) : null;
                 setValue(parsedDate);
-                /*e.stopImmediatePropagation();
-                return false;*/
                 return true;
             },
 
