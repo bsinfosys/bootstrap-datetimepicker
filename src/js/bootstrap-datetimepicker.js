@@ -144,9 +144,9 @@
                     returnMoment = moment(); //TODO should this use format? and locale?
                 } else if (hasTimeZone()) { // There is a string to parse and a default time zone
                     // parse with the tz function which takes a default time zone if it is not in the format string
-                    returnMoment = moment.tz(d, parseFormats, options.useStrict, options.timeZone);
+                    returnMoment = moment.tz(d, parseFormats, options.locale, options.useStrict, options.timeZone);
                 } else {
-                    returnMoment = moment(d, parseFormats, options.useStrict);
+                    returnMoment = moment(d, parseFormats, options.locale, options.useStrict);
                 }
 
                 if (hasTimeZone()) {
@@ -1816,6 +1816,14 @@
                 hide();
                 show();
             }
+            return picker;
+        };
+
+        picker.dayClass = function (dayClassCallback) {
+            if (arguments.length === 0) {
+                return options.dayClass;
+            }
+            options.dayClass = dayClassCallback;
             return picker;
         };
 
